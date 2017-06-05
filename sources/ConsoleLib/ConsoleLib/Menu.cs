@@ -8,6 +8,7 @@ namespace ConsoleLib
     public class Menu
     {
         private readonly List<MenuItem> _items;
+        private readonly ConsoleGraphics _graphics;
 
         public ConsoleColor BackgroundColor { get; set; }
         public ConsoleColor ForegroundColor { get; set; }
@@ -16,41 +17,7 @@ namespace ConsoleLib
         public Menu()
         {
             _items = new List<MenuItem>();
-
-            SetDefaultColors();
-            Console.CursorVisible = false;
-        }
-
-        private void InitDefaultColors()
-        {
-            BackgroundColor = ConsoleColor.Black;
-            ForegroundColor = ConsoleColor.Gray;
-            HighlightColor = ConsoleColor.Yellow;
-        }
-
-        private void InitHighlightColors()
-        {
-            BackgroundColor = ConsoleColor.Yellow;
-            ForegroundColor = ConsoleColor.Black;
-            HighlightColor = ConsoleColor.Yellow;
-        }
-
-        private void ChangeColors()
-        {
-            Console.BackgroundColor = BackgroundColor;
-            Console.ForegroundColor = ForegroundColor;
-        }
-
-        private void SetDefaultColors()
-        {
-            InitDefaultColors();
-            ChangeColors();
-        }
-
-        private void SetHighlightColors()
-        {
-            InitHighlightColors();
-            ChangeColors();
+            _graphics = new ConsoleGraphics(_items);
         }
 
         public void AddMenuItem(string menuItemCaption, Action action)
@@ -60,39 +27,9 @@ namespace ConsoleLib
 
         public void Show()
         {
-            var initialHighlightPosition = 0;
-            DisplayItems(highlightPosition:initialHighlightPosition);
-
-            SetCursorToTheFirstMenuItem();
+            _graphics.ShowItems();
 
             NavigateMenuItems();
-
-        }
-
-        private void DisplayItems(int highlightPosition)
-        {
-            if (_items != null)
-            {
-                MoveCursorTopPostion(GetInitialCursorTopPosition());
-
-                foreach (var item in _items)
-                {
-                    item.TopPosition = Console.CursorTop;
-
-                    if (item.TopPosition == highlightPosition)
-                    {
-                        SetHighlightColors();
-                    }
-                    else
-                    {
-                        SetDefaultColors();
-                    }
-
-                    Console.WriteLine(item.Name);
-                }
-
-                SetDefaultColors();
-            }
         }
 
         private void NavigateMenuItems()
@@ -111,21 +48,30 @@ namespace ConsoleLib
                     Console.CursorVisible = true;
 
                     Console.Clear();
-                    Console.WriteLine("Test");
-                    Console.ReadLine();
 
+                    var item = _items.FirstOrDefault(i => i.TopPosition == currentCursorPosition);
+                    if (item != null)
+                    {
+                        if (item.Action != null)
+                        {
+                            item.Action.Invoke();
+                        }
+                    }
+                    Console.Write("Press any key to continue...");
+                    Console.ReadKey(true);
+                    
                     Console.CursorVisible = false;
                     Console.Clear();
 
                     Console.CursorTop = currentCursorPosition;
-                    DisplayItems(highlightPosition: currentCursorPosition);
+                    _graphics.HighlightItem(highlightPosition: currentCursorPosition);
                     Console.CursorTop = currentCursorPosition;
                 }
                 else
                 {
                     var nextCursorPosition = GetNextCursorTopPosition(key, firstItemTopPosition, lastItemTopPosition);
 
-                    DisplayItems(highlightPosition: nextCursorPosition);
+                    _graphics.HighlightItem(highlightPosition: nextCursorPosition);
 
                     Console.CursorTop = nextCursorPosition;
                 }
@@ -178,21 +124,10 @@ namespace ConsoleLib
 
         
 
-        private int GetInitialCursorTopPosition()
-        {
-            return 0;
-        }
+       
 
-        private void MoveCursorTopPostion(int nextPosition)
-        {
-            Console.CursorTop = nextPosition;
-        }
+       
 
-        private void SetCursorToTheFirstMenuItem()
-        {
-            var firstItem = _items.FirstOrDefault();
-            if (firstItem != null)
-                Console.CursorTop = firstItem.TopPosition;
-        }
+       
     }
 }
