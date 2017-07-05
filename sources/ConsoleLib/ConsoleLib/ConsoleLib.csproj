@@ -40,9 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IItemPositionManager.cs" />
+    <Compile Include="IItemSelector.cs" />
+    <Compile Include="ItemActionService.cs" />
+    <Compile Include="ItemSelector.cs" />
+    <Compile Include="KeyToMenuActionConverter.cs" />
+    <Compile Include="MenuItemNavigator.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="ConsoleGraphics.cs" />
+    <Compile Include="NavigationArgs.cs" />
+    <Compile Include="NavigationDirectionEnum.cs" />
     <Compile Include="MenuItem.cs" />
+    <Compile Include="ItemPositionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

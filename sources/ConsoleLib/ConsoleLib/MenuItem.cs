@@ -2,7 +2,7 @@
 
 namespace ConsoleLib
 {
-    public class MenuItem
+    internal class MenuItem
     {
         /// <summary>
         /// The name of the menu item that is displayed inside the console. 
@@ -17,6 +17,8 @@ namespace ConsoleLib
         /// The top position of the menu item within the menu.
         /// </summary>
         public int TopPosition { get; set; }
+
+        public bool IsSelected { get; set; }
 
 
         public MenuItem(string name, Action action)

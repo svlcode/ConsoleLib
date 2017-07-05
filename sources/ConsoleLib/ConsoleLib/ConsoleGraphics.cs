@@ -9,14 +9,17 @@ namespace ConsoleLib
     class ConsoleGraphics
     {
         private readonly List<MenuItem> _items;
+        private readonly IItemPositionManager _itemPositionManager;
 
         public ConsoleColor BackgroundColor { get; set; }
         public ConsoleColor ForegroundColor { get; set; }
         public ConsoleColor HighlightColor { get; set; }
 
-        public ConsoleGraphics(List<MenuItem> items)
+        public ConsoleGraphics(List<MenuItem> items, IItemPositionManager itemPositionManager)
         {
             _items = items;
+            _itemPositionManager = itemPositionManager;
+
             SetDefaultColors();
             Console.CursorVisible = false;
         }
@@ -53,35 +56,23 @@ namespace ConsoleLib
             ChangeColors();
         }
 
-        public void ShowItems()
+        public void RenderItems()
         {
-            var initialHighlightPosition = 0;
-            HighlightItem(highlightPosition: initialHighlightPosition);
+            var currentItemPosition = _itemPositionManager.GetCurrentCursorTopPosition();
 
-            SetCursorToTheFirstMenuItem();
+            _itemPositionManager.MoveCursorToFirstItemPosition();
+            WriteItems();
+
+            _itemPositionManager.MoveCursorToTopPosition(currentItemPosition);
         }
 
-        private void MoveCursorTopPostion(int nextPosition)
-        {
-            Console.CursorTop = nextPosition;
-        }
-
-        private int GetInitialCursorTopPosition()
-        {
-            return 0;
-        }
-
-        public void HighlightItem(int highlightPosition)
+        private void WriteItems()
         {
             if (_items != null)
             {
-                MoveCursorTopPostion(GetInitialCursorTopPosition());
-
                 foreach (var item in _items)
                 {
-                    item.TopPosition = Console.CursorTop;
-
-                    if (item.TopPosition == highlightPosition)
+                    if (item.IsSelected)
                     {
                         SetHighlightColors();
                     }
@@ -90,20 +81,14 @@ namespace ConsoleLib
                         SetDefaultColors();
                     }
 
-                    Console.WriteLine(item.Name);
+                    Console.Write(item.Name);
+
+                    SetDefaultColors();
+                    Console.WriteLine();
                 }
 
                 SetDefaultColors();
             }
         }
-
-        private void SetCursorToTheFirstMenuItem()
-        {
-            var firstItem = _items.FirstOrDefault();
-            if (firstItem != null)
-                Console.CursorTop = firstItem.TopPosition;
-        }
-
-        
     }
 }
