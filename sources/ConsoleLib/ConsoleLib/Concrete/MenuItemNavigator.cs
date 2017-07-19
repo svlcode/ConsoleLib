@@ -2,7 +2,7 @@
 
 namespace ConsoleLib
 {
-    internal class MenuItemNavigator
+    internal sealed class MenuItemNavigator
     {
         private readonly IItemPositionManager _itemPositionManager;
         private readonly IItemSelector _itemSelector;

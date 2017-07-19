@@ -2,7 +2,7 @@
 
 namespace ConsoleLib
 {
-    internal class ItemActionService
+    internal sealed class ItemActionService
     {
         private readonly IItemPositionManager _itemPositionManager;
         private readonly IItemSelector _itemSelector;

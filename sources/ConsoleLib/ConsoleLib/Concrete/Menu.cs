@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ConsoleLib
 {
-    public class Menu
+    internal sealed class Menu: IMenu
     {
         private readonly List<MenuItem> _items;
         private readonly ConsoleGraphics _graphics;

@@ -1,6 +1,6 @@
 ﻿namespace ConsoleLib
 {
-    public enum NavigationDirectionEnum
+    internal enum NavigationDirectionEnum
     {
        Next,
        Previous,

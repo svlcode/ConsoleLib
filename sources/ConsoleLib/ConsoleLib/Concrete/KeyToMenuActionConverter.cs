@@ -2,16 +2,10 @@
 
 namespace ConsoleLib
 {
-    internal class KeyToMenuActionConverter
+    internal sealed class KeyToMenuActionConverter
     {
         public event EventHandler<NavigationArgs> Navigate;
         public event EventHandler StartItemAction;
-        public event EventHandler CloseMenu;
-
-        public KeyToMenuActionConverter()
-        {
-            
-        }
 
         public void ReadKeys()
         {

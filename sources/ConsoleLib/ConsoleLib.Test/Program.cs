@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleLib.Factory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace ConsoleLib.Test
     {
         static void Main(string[] args)
         {
-            Menu menu = new Menu();
+            IMenu menu = ConsoleMenuFactory.CreateMenu();
             menu.AddMenuItem("Suma a doua numere", () =>
             {
                 int a, b;
@@ -49,7 +50,7 @@ namespace ConsoleLib.Test
             });
             menu.AddMenuItem("Alt meniu", () =>
             {
-                var innerMenu = new Menu();
+                var innerMenu = ConsoleMenuFactory.CreateMenu();
                 innerMenu.AddMenuItem("First item", () =>
                 {
                     Console.WriteLine("Test 1");

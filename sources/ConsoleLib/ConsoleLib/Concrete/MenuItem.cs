@@ -2,7 +2,7 @@
 
 namespace ConsoleLib
 {
-    internal class MenuItem
+    internal sealed class MenuItem
     {
         /// <summary>
         /// The name of the menu item that is displayed inside the console. 

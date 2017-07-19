@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleLib
 {
-    class ConsoleGraphics
+    internal sealed class ConsoleGraphics
     {
         private readonly List<MenuItem> _items;
         private readonly IItemPositionManager _itemPositionManager;

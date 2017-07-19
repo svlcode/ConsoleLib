@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ConsoleLib
 {
-    internal class ItemPositionManager : IItemPositionManager
+    internal sealed class ItemPositionManager : IItemPositionManager
     {
         private readonly List<MenuItem> _items;
         private const int DEFAULT_OFFSET_TOP_ITEM_POSITION = 0;

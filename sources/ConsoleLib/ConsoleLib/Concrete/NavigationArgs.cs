@@ -2,7 +2,7 @@ using System;
 
 namespace ConsoleLib
 {
-    internal class NavigationArgs : EventArgs
+    internal sealed class NavigationArgs : EventArgs
     {
         public NavigationDirectionEnum Direction { get; }
 

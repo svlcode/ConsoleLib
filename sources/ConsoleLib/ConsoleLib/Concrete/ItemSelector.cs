@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ConsoleLib
 {
-    internal class ItemSelector : IItemSelector
+    internal sealed class ItemSelector : IItemSelector
     {
         private readonly List<MenuItem> _items;
 
