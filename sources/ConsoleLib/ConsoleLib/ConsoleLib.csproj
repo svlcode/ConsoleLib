@@ -14,7 +14,16 @@
     <PackageId>SvlCode.ConsoleLib</PackageId>
     <Title>SvlCode.ConsoleLib</Title>
     <Authors>SvlCode</Authors>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/svlcode/ConsoleLib</RepositoryUrl>
+    <PackageTags>Console, menu</PackageTags>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
