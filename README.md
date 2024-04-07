@@ -1,3 +1,3 @@
 # ConsoleLib
 
-A console menu library which has the ability navigate between menu items using the arrow keys and highlights the current menu item with a different color
+A console library which offers the possibility to navigate between menu items in the console window using the arrow keys and highlighting the current menu item with a different color.
